@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Multiple Inheritance
+class PersonalDetails {
+protected:
+    string name;
+    int age;
+    string gender;
+
+public:
+    PersonalDetails() {
+        name = "Unknown";
+        age = 0;
+        gender = "Unknown";
+    }
+    
+    PersonalDetails(string n, int a, string g) {
+        name = n;
+        age = a;
+        gender = g;
+    }
+    
+    void displayPersonal() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Gender: " << gender << endl;
+    }
+};
+
+class SalaryDetails {
+protected:
+    float basicSalary;
+    float allowances;
+    float deductions;
+
+public:
+    SalaryDetails() {
+        basicSalary = 0;
+        allowances = 0;
+        deductions = 0;
+    }
+    
+    SalaryDetails(float bs, float al, float de) {
+        basicSalary = bs;
+        allowances = al;
+        deductions = de;
+    }
+    
+    float calculateNetSalary() {
+        return basicSalary + allowances - deductions;
+    }
+    
+    void displaySalary() {
+        cout << "Basic Salary: " << basicSalary << endl;
+        cout << "Allowances: " << allowances << endl;
+        cout << "Deductions: " << deductions << endl;
+        cout << "Net Salary: " << calculateNetSalary() << endl;
+    }
+};
+
+class Employee : public PersonalDetails, public SalaryDetails {
+private:
+    int employeeId;
+    string department;
+
+public:
+    Employee() : PersonalDetails(), SalaryDetails() {
+        employeeId = 0;
+        department = "Unknown";
+    }
+    
+    Employee(string n, int a, string g, float bs, float al, float de,
+             int id, string dept) 
+        : PersonalDetails(n, a, g), SalaryDetails(bs, al, de) {
+        employeeId = id;
+        department = dept;
+    }
+    
